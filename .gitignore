@@ -1,0 +1,19 @@
+# Resultados de conversión
+salida/
+
+# Documentos de prueba (no se versionan binarios; ver pruebas/README.md)
+pruebas/*
+!pruebas/README.md
+
+# Ningún documento suelto en el repositorio
+*.pdf
+*.docx
+
+# Configuración local
+.env
+
+# Python
+__pycache__/
+
+# Temporales de escritura atómica de convertir.py
+*.tmp-*

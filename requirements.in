@@ -1,0 +1,23 @@
+# Dependencias directas de docling-local.
+#
+# Se usa `docling-slim` con extras seleccionados en lugar del meta-paquete
+# `docling`: desde 2.9x, `docling` == `docling-slim[standard]`, y el extra
+# `standard` arrastra RapidOCR, docling-core[chunking], backends de pptx/xlsx/
+# email, httpx/websockets, etc. La restricción 8 del proyecto prohíbe RapidOCR/EasyOCR/VLM.
+# Es el mismo código y la misma numeración de versiones que `docling`; los
+# avisos de seguridad de GitHub se publican para ambos nombres.
+#
+#   format-pdf   -> docling-parse, pypdfium2
+#   format-docx  -> python-docx (backend nativo de Word)
+#   convert-core -> numpy, pillow, rtree, scipy
+#   models-local -> docling-ibm-models (layout, TableFormer), torch, torchvision
+#   cli          -> typer, rich (necesario para `docling-tools models download`)
+#
+# Mínimos de seguridad: docling >= 2.132.0 (último fix publicado en GHSA a la
+# fecha) y docling-core >= 2.74.1 (incluye CVE-2026-24009, fix 2.48.4).
+docling-slim[format-pdf,format-docx,convert-core,models-local,cli]>=2.132.0
+docling-core>=2.74.1
+# Mismo rango que declara docling-ibm-models para su extra headless.
+opencv-python-headless<5
+# Requerido por TesseractCliOcrModel para leer la salida TSV de tesseract.
+pandas
